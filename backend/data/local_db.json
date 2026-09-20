@@ -9,10 +9,10 @@
       "sku": "",
       "description": "",
       "created_at": "2026-09-20T13:07:07.819Z",
-      "last_price": 4672,
-      "last_stock": 143,
-      "in_stock": true,
-      "last_scraped_at": "2026-09-20T13:07:17.840Z"
+      "last_price": 4,
+      "last_stock": 0,
+      "in_stock": false,
+      "last_scraped_at": "2026-09-20T14:09:07.214Z"
     }
   ],
   "price_history": [
@@ -42,9 +42,30 @@
       "in_stock": true,
       "stock_count": 26,
       "recorded_at": "2026-09-20T13:49:12.054Z"
+    },
+    {
+      "id": 1789913347414.8696,
+      "product_id": 273,
+      "price": 4,
+      "currency": "INR",
+      "in_stock": false,
+      "stock_count": 0,
+      "recorded_at": "2026-09-20T14:09:07.214Z"
     }
   ],
   "scrape_logs": [
+    {
+      "id": 1789913347427.368,
+      "product_id": 273,
+      "product_name": "Cobalt Keyboard Max",
+      "status": "success",
+      "attempts": 1,
+      "duration_ms": 20982,
+      "price_found": 4,
+      "stock_found": 0,
+      "error_message": null,
+      "created_at": "2026-09-20T14:09:07.416Z"
+    },
     {
       "id": 1789912152075.1433,
       "product_id": 833,
@@ -84,6 +105,15 @@
   ],
   "alerts": [
     {
+      "id": 1789913347216.7485,
+      "product_id": 273,
+      "product_name": "Cobalt Keyboard Max",
+      "type": "PRICE_DROP",
+      "message": "Price dropped by 100%! Was ₹4,672, now ₹4.",
+      "timestamp": "2026-09-20T14:09:07.214Z",
+      "read": false
+    },
+    {
       "id": 1789912819423.4158,
       "type": "LAYOUT_DRIFT",
       "message": "Storefront layout mutated! Revision shifted from 626003 to 627002. Scraper automatically adapted to new dynamic selectors.",
@@ -106,6 +136,6 @@
     },
     "status": "STABLE",
     "drift_detected": false,
-    "last_checked": "2026-09-20T14:00:25.028Z"
+    "last_checked": "2026-09-20T14:13:42.691Z"
   }
 }
