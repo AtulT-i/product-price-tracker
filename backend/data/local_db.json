@@ -105,6 +105,13 @@
   ],
   "alerts": [
     {
+      "id": 1789915415189.9922,
+      "type": "LAYOUT_DRIFT",
+      "message": "Storefront layout mutated! Revision shifted from 627002 to 627003. Scraper automatically adapted to new dynamic selectors.",
+      "timestamp": "2026-09-20T14:43:35.190Z",
+      "read": false
+    },
+    {
       "id": 1789913347216.7485,
       "product_id": 273,
       "product_name": "Cobalt Keyboard Max",
@@ -122,20 +129,20 @@
     }
   ],
   "store_health": {
-    "last_revision": 627002,
+    "last_revision": 627003,
     "classes": {
-      "priceWrap": "pw-k2",
-      "priceValue": "pv-k2",
-      "mrp": "mr-k2",
-      "sale": "sl-k2",
-      "badge": "bd-k2",
-      "rating": "rt-k2",
-      "seller": "sr-k2",
-      "delivery": "dl-k2",
-      "stock": "st-k2"
+      "priceWrap": "pw-z6",
+      "priceValue": "pv-z6",
+      "mrp": "mr-z6",
+      "sale": "sl-z6",
+      "badge": "bd-z6",
+      "rating": "rt-z6",
+      "seller": "sr-z6",
+      "delivery": "dl-z6",
+      "stock": "st-z6"
     },
     "status": "STABLE",
     "drift_detected": false,
-    "last_checked": "2026-09-20T14:13:42.691Z"
+    "last_checked": "2026-09-20T14:49:52.991Z"
   }
 }
