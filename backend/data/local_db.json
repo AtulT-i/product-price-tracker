@@ -1,0 +1,43 @@
+{
+  "tracked_products": [
+    {
+      "product_id": 273,
+      "name": "Cobalt Keyboard Max",
+      "slug": "",
+      "brand": "Cobalt",
+      "category": "Peripherals",
+      "sku": "",
+      "description": "",
+      "created_at": "2026-09-20T13:07:07.819Z",
+      "last_price": 4672,
+      "last_stock": 143,
+      "in_stock": true,
+      "last_scraped_at": "2026-09-20T13:07:17.840Z"
+    }
+  ],
+  "price_history": [
+    {
+      "id": 1789909637848.4539,
+      "product_id": 273,
+      "price": 4672,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 143,
+      "recorded_at": "2026-09-20T13:07:17.840Z"
+    }
+  ],
+  "scrape_logs": [
+    {
+      "id": 1789909637857.691,
+      "product_id": 273,
+      "product_name": "Cobalt Keyboard Max",
+      "status": "success",
+      "attempts": 1,
+      "duration_ms": 10012,
+      "price_found": 4672,
+      "stock_found": 143,
+      "error_message": null,
+      "created_at": "2026-09-20T13:07:17.851Z"
+    }
+  ]
+}
