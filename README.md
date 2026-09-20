@@ -9,7 +9,7 @@ A resilient, full-stack product price and stock tracking application built for t
 - **Live Application (Frontend)**: [Deployed on Vercel](https://your-vercel-app.vercel.app) *(Replace with your live link)*
 - **Live Backend API**: [Deployed on Render](https://your-render-app.onrender.com) *(Replace with your live link)*
 - **Target Mock Store**: [https://demo.inelabteamdev.com/](https://demo.inelabteamdev.com/)
-- **GitHub Repository**: [https://github.com/yourusername/product-price-tracker](https://github.com/yourusername/product-price-tracker)
+- **GitHub Repository**: [https://github.com/AtulT-i/product-price-tracker](https://github.com/AtulT-i/product-price-tracker)
 
 ---
 
