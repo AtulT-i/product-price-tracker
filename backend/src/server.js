@@ -58,7 +58,7 @@ async function monitorStoreLayout() {
 }
 
 // 1. Health check & Render Keep-Alive
-app.get('/api/health', (req, res) => {
+app.get('/', (req, res) => res.json({ status: 'ok', service: 'INE Product Price Tracker Backend API', health: '/api/health', catalog: '/api/catalog/search', tracked: '/api/tracked' }));\n\napp.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'INE Product Price Tracker Enterprise Backend',
