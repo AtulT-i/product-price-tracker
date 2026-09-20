@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -23,8 +23,7 @@ async function fetchCatalog(force = false) {
   try {
     console.log('[Server] Fetching full catalog from INE mock store...');
     const allItems = [];
-    // The store has 1000 items in pages of 50
-    for (let page = 1; page <= 5; page++) { // fetch first 250 for quick responsiveness
+    for (let page = 1; page <= 6; page++) {
       const res = await fetch(`https://demo.inelabteamdev.com/api/catalog?page=${page}&pageSize=50`);
       if (res.ok) {
         const data = await res.json();
@@ -45,16 +44,37 @@ async function fetchCatalog(force = false) {
   }
 }
 
+// Layout drift monitor
+async function monitorStoreLayout() {
+  try {
+    const res = await fetch('https://demo.inelabteamdev.com/api/layout');
+    if (res.ok) {
+      const layout = await res.json();
+      await db.updateStoreHealth(layout);
+    }
+  } catch (err) {
+    console.warn('[Server] Failed to fetch store layout:', err.message);
+  }
+}
+
 // 1. Health check & Render Keep-Alive
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'INE Product Price Tracker Backend',
+    service: 'INE Product Price Tracker Enterprise Backend',
+    uptime_seconds: Math.round(process.uptime()),
     timestamp: new Date().toISOString()
   });
 });
 
-// 2. Search catalog by partial or full product name / brand / category
+// 2. Store Health & Layout Drift Monitor
+app.get('/api/health/store', async (req, res) => {
+  await monitorStoreLayout();
+  const health = db.getStoreHealth();
+  res.json({ health });
+});
+
+// 3. Search catalog
 app.get('/api/catalog/search', async (req, res) => {
   const query = (req.query.q || '').trim().toLowerCase();
   const catalog = await fetchCatalog();
@@ -74,7 +94,7 @@ app.get('/api/catalog/search', async (req, res) => {
   res.json({ items: results.slice(0, 30) });
 });
 
-// 3. Get all tracked products
+// 4. Get tracked products
 app.get('/api/tracked', async (req, res) => {
   try {
     const products = await db.getTrackedProducts();
@@ -84,7 +104,7 @@ app.get('/api/tracked', async (req, res) => {
   }
 });
 
-// 4. Track a new product
+// 5. Track product
 app.post('/api/track', async (req, res) => {
   try {
     const product = req.body;
@@ -94,9 +114,9 @@ app.post('/api/track', async (req, res) => {
 
     const tracked = await db.addTrackedProduct(product);
 
-    // Trigger an initial asynchronous scrape so price and stock are recorded immediately
+    // Trigger initial background scrape immediately
     scrapeProduct(product.id, { productName: product.name }).catch(err => {
-      console.error(`[Server] Background initial scrape failed for ${product.id}:`, err.message);
+      console.error(`[Server] Background scrape failed for ${product.id}:`, err.message);
     });
 
     res.status(201).json({ message: 'Product tracked successfully', product: tracked });
@@ -105,7 +125,19 @@ app.post('/api/track', async (req, res) => {
   }
 });
 
-// 5. Remove tracked product
+// 6. Update product settings (target price & frequency)
+app.patch('/api/track/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const { targetPrice, frequency } = req.body;
+    const updated = await db.updateProductSettings(productId, { targetPrice, frequency });
+    res.json({ message: 'Settings updated', product: updated });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 7. Remove tracked product
 app.delete('/api/track/:id', async (req, res) => {
   try {
     const productId = req.params.id;
@@ -116,7 +148,7 @@ app.delete('/api/track/:id', async (req, res) => {
   }
 });
 
-// 6. Get price history for a product
+// 8. Price history
 app.get('/api/history/:id', async (req, res) => {
   try {
     const productId = req.params.id;
@@ -127,7 +159,24 @@ app.get('/api/history/:id', async (req, res) => {
   }
 });
 
-// 7. Get scrape audit logs
+// 9. Export price history as CSV
+app.get('/api/export/csv/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const history = await db.getPriceHistory(productId);
+    let csv = 'RecordedAt,PriceINR,InStock,StockCount\n';
+    history.forEach(h => {
+      csv += `"${h.recorded_at}",${h.price},${h.in_stock},${h.stock_count}\n`;
+    });
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename="price-history-${productId}.csv"`);
+    res.send(csv);
+  } catch (err) {
+    res.status(500).send('Error generating CSV');
+  }
+});
+
+// 10. Audit logs
 app.get('/api/logs', async (req, res) => {
   try {
     const productId = req.query.productId ? Number(req.query.productId) : null;
@@ -139,7 +188,17 @@ app.get('/api/logs', async (req, res) => {
   }
 });
 
-// 8. Trigger immediate scrape (for cron-job.org or manual button)
+// 11. Alerts notification center
+app.get('/api/alerts', (req, res) => {
+  res.json({ alerts: db.getAlerts() });
+});
+
+app.post('/api/alerts/clear', (req, res) => {
+  db.clearAlerts();
+  res.json({ message: 'Alerts cleared' });
+});
+
+// 12. Trigger immediate scrape
 let isScrapingInProgress = false;
 app.post('/api/scrape-now', async (req, res) => {
   if (isScrapingInProgress) {
@@ -147,9 +206,8 @@ app.post('/api/scrape-now', async (req, res) => {
   }
 
   isScrapingInProgress = true;
-  res.json({ message: 'Scheduled scrape initiated' });
+  res.json({ message: 'Scheduled scrape initiated across all tracked products' });
 
-  // Run in background
   (async () => {
     try {
       console.log('[Server] /api/scrape-now triggered');
@@ -162,9 +220,8 @@ app.post('/api/scrape-now', async (req, res) => {
   })();
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`[Server] Product Price Tracker backend running on port ${PORT}`);
-  // Preload catalog
+  console.log(`[Server] INE Price Tracker Enterprise Backend running on port ${PORT}`);
   fetchCatalog().catch(() => {});
+  monitorStoreLayout().catch(() => {});
 });

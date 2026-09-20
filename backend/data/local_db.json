@@ -24,9 +24,51 @@
       "in_stock": true,
       "stock_count": 143,
       "recorded_at": "2026-09-20T13:07:17.840Z"
+    },
+    {
+      "id": 1789912098017.904,
+      "product_id": 411,
+      "price": 164054,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 124,
+      "recorded_at": "2026-09-20T13:48:18.003Z"
+    },
+    {
+      "id": 1789912152066.0261,
+      "product_id": 833,
+      "price": 19838,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 26,
+      "recorded_at": "2026-09-20T13:49:12.054Z"
     }
   ],
   "scrape_logs": [
+    {
+      "id": 1789912152075.1433,
+      "product_id": 833,
+      "product_name": "Cobalt Keyboard XL",
+      "status": "retried",
+      "attempts": 2,
+      "duration_ms": 46068,
+      "price_found": 19838,
+      "stock_found": 26,
+      "error_message": null,
+      "created_at": "2026-09-20T13:49:12.068Z"
+    },
+    {
+      "id": 1789912098033.6306,
+      "product_id": 411,
+      "product_name": "Ironwood Workstation Plus",
+      "status": "success",
+      "attempts": 1,
+      "duration_ms": 27678,
+      "price_found": 164054,
+      "stock_found": 124,
+      "error_message": null,
+      "created_at": "2026-09-20T13:48:18.021Z"
+    },
     {
       "id": 1789909637857.691,
       "product_id": 273,
@@ -39,5 +81,31 @@
       "error_message": null,
       "created_at": "2026-09-20T13:07:17.851Z"
     }
-  ]
+  ],
+  "alerts": [
+    {
+      "id": 1789912819423.4158,
+      "type": "LAYOUT_DRIFT",
+      "message": "Storefront layout mutated! Revision shifted from 626003 to 627002. Scraper automatically adapted to new dynamic selectors.",
+      "timestamp": "2026-09-20T14:00:19.423Z",
+      "read": false
+    }
+  ],
+  "store_health": {
+    "last_revision": 627002,
+    "classes": {
+      "priceWrap": "pw-k2",
+      "priceValue": "pv-k2",
+      "mrp": "mr-k2",
+      "sale": "sl-k2",
+      "badge": "bd-k2",
+      "rating": "rt-k2",
+      "seller": "sr-k2",
+      "delivery": "dl-k2",
+      "stock": "st-k2"
+    },
+    "status": "STABLE",
+    "drift_detected": false,
+    "last_checked": "2026-09-20T14:00:25.028Z"
+  }
 }
