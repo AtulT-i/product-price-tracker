@@ -13,6 +13,38 @@
       "last_stock": 0,
       "in_stock": false,
       "last_scraped_at": "2026-09-20T14:09:07.214Z"
+    },
+    {
+      "product_id": 411,
+      "name": "Ironwood Workstation Plus",
+      "slug": "ironwood-workstation-plus",
+      "brand": "Ironwood",
+      "category": "Laptops",
+      "sku": "IRO-10411",
+      "description": "The Ironwood Workstation Plus. A dependable laptops pick.",
+      "frequency": "2h",
+      "target_price": 150000,
+      "last_price": 154955,
+      "last_stock": 14,
+      "in_stock": true,
+      "last_scraped_at": "2026-09-20T17:20:43.835Z",
+      "created_at": "2026-09-20T16:20:43.857Z"
+    },
+    {
+      "product_id": 833,
+      "name": "Cobalt Keyboard XL",
+      "slug": "cobalt-keyboard-xl",
+      "brand": "Cobalt",
+      "category": "Peripherals",
+      "sku": "COB-10833",
+      "description": "The Cobalt Keyboard XL. A dependable peripherals pick.",
+      "frequency": "2h",
+      "target_price": 15000,
+      "last_price": 15757,
+      "last_stock": 97,
+      "in_stock": true,
+      "last_scraped_at": "2026-09-20T17:20:43.857Z",
+      "created_at": "2026-09-20T15:20:43.857Z"
     }
   ],
   "price_history": [
@@ -105,9 +137,99 @@
       "in_stock": true,
       "stock_count": 97,
       "recorded_at": "2026-09-20T16:37:46.717Z"
+    },
+    {
+      "id": 1789923921273.7756,
+      "product_id": 411,
+      "price": 154955,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 114,
+      "recorded_at": "2026-09-20T17:05:21.254Z"
+    },
+    {
+      "id": 1789923937032.67,
+      "product_id": 833,
+      "price": 15757,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 97,
+      "recorded_at": "2026-09-20T17:05:37.024Z"
+    },
+    {
+      "product_id": 411,
+      "price": 164054,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 164,
+      "recorded_at": "2026-09-20T15:20:43.857Z"
+    },
+    {
+      "product_id": 411,
+      "price": 158200,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 85,
+      "recorded_at": "2026-09-20T16:20:43.857Z"
+    },
+    {
+      "product_id": 411,
+      "price": 154955,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 14,
+      "recorded_at": "2026-09-20T17:20:43.857Z"
+    },
+    {
+      "product_id": 833,
+      "price": 20457,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 21,
+      "recorded_at": "2026-09-20T15:20:43.857Z"
+    },
+    {
+      "product_id": 833,
+      "price": 17200,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 50,
+      "recorded_at": "2026-09-20T16:20:43.857Z"
+    },
+    {
+      "product_id": 833,
+      "price": 15757,
+      "currency": "INR",
+      "in_stock": true,
+      "stock_count": 97,
+      "recorded_at": "2026-09-20T17:20:43.857Z"
     }
   ],
   "scrape_logs": [
+    {
+      "id": 1789923937041.2385,
+      "product_id": 833,
+      "product_name": "Cobalt Keyboard XL",
+      "status": "success",
+      "attempts": 1,
+      "duration_ms": 12210,
+      "price_found": 15757,
+      "stock_found": 97,
+      "error_message": null,
+      "created_at": "2026-09-20T17:05:37.034Z"
+    },
+    {
+      "id": 1789923921290.122,
+      "product_id": 411,
+      "product_name": "Ironwood Workstation Plus",
+      "status": "success",
+      "attempts": 1,
+      "duration_ms": 19866,
+      "price_found": 154955,
+      "stock_found": 114,
+      "error_message": null,
+      "created_at": "2026-09-20T17:05:21.282Z"
+    },
     {
       "id": 1789922266727.144,
       "product_id": 833,
